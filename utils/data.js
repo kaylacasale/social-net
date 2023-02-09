@@ -24,20 +24,15 @@ const users =
         "username": "kayla",
         "email": "kayla.casale@gmail.com",
         "thoughts": [],
-        "friends": []
+        "friends": [],
     }]
 
 const thoughts =
     [{
         "thoughtText": "I like when people are nice!",
-        "username": "kaylacasale",
-        "reactions": []
+        "username": "kaylacasale"
     }]
 
-const reactions =
-    [{
-        "reactionBody": "O M G!",
-        "username": "kc"
-    }]
-module.exports = users, thoughts, reactions
+
+module.exports = { users, thoughts }
 

@@ -1,7 +1,7 @@
 const connection = require('../config/connection');
 const { User, Thought } = require('../models');
-const users = require('./data')
-const thoughts = require('./data')
+const { users } = require('./data')
+const { thoughts } = require('./data')
 const reactions = require('./data')
 
 
@@ -11,8 +11,28 @@ connection.once('open', async () => {
     await Thought.deleteMany({});
 
     // Empty arrays for randomly generated posts and tags
-    // const users = [];
-    // const thoughts = [];
+    //* these are used to push model objects into from seed data
+    // const users = []; // just push
+    // const thoughts = []; // use for loop to push into each users or forEach(?)
+    // const reactions = [];
+    // const makeUser = (username, email, friends) => {
+    //     users.push({
+    //         username: "kayla",
+    //         email: "kayla.casale@gmail.com",
+    //         thoughts: "I am here!",
+    //         friends: 5
+    //     })
+    // }
+
+
+
+    // for (let i = 0; i < 20; i++) {
+    //     thoughts.push({
+    //         thoughts
+
+    //     })
+    // }
+
 
     await User.collection.insertMany(users);
 
@@ -20,15 +40,15 @@ connection.once('open', async () => {
 
     await Thought.collection.insertMany(thoughts)
 
-    Thought.create(
-        { thoughtText: 'hmmm', username: 'kk', reactions: reactions }
-    )
+    // Thought.create(
+    //     { thoughtText: 'hmmm', username: 'kk', reactions: reactions }
+    // )
 
-    User.collection.insertOne({
-        username: "siena",
-        email: "siena.casale@gmail.com",
-        thoughts: [...thoughts]
-    })
+    // User.collection.insertOne({
+    //     username: "siena",
+    //     email: "siena.casale@gmail.com",
+    //     thoughts: [...thoughts]
+    // })
     // Thought.collection.insertOne({
     //     thoughtText: "hiii",
     //     username: "siena",

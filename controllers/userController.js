@@ -42,26 +42,28 @@ module.exports = {
     // get a single user by ID
     getSingleUser(req, res) {
         User.findOne({ _id: req.params.userId })
-            .populate("thoughts")
-            .populate("friends")
-            // .populate({ path: 'thoughts', select: '-_v' })
-            // .populate({ path: 'friends', select: '-_v' })
+            // .populate("thoughts")
+            // .populate("friends")
+            .populate({ path: 'thoughts', select: '-_v' })
+            .populate({ path: 'friends', select: '-_v' })
             .then((user) =>
                 !user
                     ? res.status(404).json({ message: 'No user found with that ID' })
                     : res.json(post)
+
             )
             .catch((err) => res.status(500).json(err))
     },
 
+    //create a user
     createUser(req, res) {
         User.create(req.body)
             .then((user) => res.json(user))
             .catch((err) => {
                 console.log(err);
                 return res.status(500).json(err);
-            })
-    }
+            });
+    },
 }
 
 

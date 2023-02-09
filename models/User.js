@@ -6,7 +6,7 @@ const { Schema, model, Types, Email } = require('mongoose');
 // after installing mongoose-type-email to validate email input, require this npm package
 // require('mongoose-type-email')
 // Require Thought model and assign to variable
-const thoughtSchema = require('./Thought')
+// const thoughtSchema = require('./Thought')
 
 // Schema to create User model
 // make sure ech object has username and mail
@@ -38,7 +38,7 @@ const userSchema = new Schema(
         thoughts: [
             {
                 type: Schema.Types.ObjectId, //* need to push id to thoughts arr in user table 
-                ref: 'thoughts'
+                ref: 'thought'
             }
         ]
     },
@@ -46,7 +46,7 @@ const userSchema = new Schema(
         friends: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'users',
+                ref: 'user',
                 // default: () => Math.floor(Math.random() * (100 - 70 + 1) + 70),
             }
 
