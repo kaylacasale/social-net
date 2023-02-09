@@ -1,6 +1,9 @@
 const connection = require('../config/connection');
 const { User, Thought } = require('../models');
 const users = require('./data')
+const thoughts = require('./data')
+const reactions = require('./data')
+
 
 connection.once('open', async () => {
     // Delete the entries in the collection
@@ -13,8 +16,32 @@ connection.once('open', async () => {
 
     await User.collection.insertMany(users);
 
+    // users.forEach(() => make)
+
+    await Thought.collection.insertMany(thoughts)
+
+    Thought.create(
+        { thoughtText: 'hmmm', username: 'kk', reactions: reactions }
+    )
+
+    User.collection.insertOne({
+        username: "siena",
+        email: "siena.casale@gmail.com",
+        thoughts: [...thoughts]
+    })
+    // Thought.collection.insertOne({
+    //     thoughtText: "hiii",
+    //     username: "siena",
+    //     reactions: 
+
+    // })
+
+    // Thought.create(
+    //     {}
+    // )
     console.table(users);
     console.table(users, ['username', 'email', 'thoughts']);
+    console.table(thoughts, ['thoughtText', 'username'])
     console.timeEnd('seeding');
     process.exit(0);
 })

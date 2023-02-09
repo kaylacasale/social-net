@@ -27,5 +27,17 @@ const users =
         "friends": []
     }]
 
-module.exports = users
+const thoughts =
+    [{
+        "thoughtText": "I like when people are nice!",
+        "username": "kaylacasale",
+        "reactions": []
+    }]
+
+const reactions =
+    [{
+        "reactionBody": "O M G!",
+        "username": "kc"
+    }]
+module.exports = users, thoughts, reactions
 
