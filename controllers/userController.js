@@ -40,16 +40,17 @@ module.exports = {
     },
 
     // get a single user by ID
-    getSingleUser(req, res) {
-        User.findOne({ _id: req.params.userId })
-            // .populate("thoughts")
-            // .populate("friends")
-            .populate({ path: 'thoughts', select: '-_v' })
-            .populate({ path: 'friends', select: '-_v' })
+    getSingleUser({ params }, res) {
+        User.findOne({ _id: params.userId })
+            .populate("thoughts")
+            .populate("friends")
+            .select("-_v")
+            // .populate({ path: 'thoughts', select: '-_v' })
+            // .populate({ path: 'friends', select: '-_v' })
             .then((user) =>
                 !user
                     ? res.status(404).json({ message: 'No user found with that ID' })
-                    : res.json(post)
+                    : res.json(user)
 
             )
             .catch((err) => res.status(500).json(err))
@@ -64,6 +65,26 @@ module.exports = {
                 return res.status(500).json(err);
             });
     },
+
+
+    // add a friend
+    addFriend(req, res) {
+        console.log('You are adding a friend!');
+        console.log(req.body);
+        User.findOneAndUpdate(
+            { _id: req.params.friendId },
+            { $addToSet: { friends: req.params.friendId } },
+            { runValidators: true, new: true }
+        )
+            .then((user) =>
+                !user
+                    ? res
+                        .status(404)
+                        .json({ message: 'No user found with that ID! :(' })
+                    : res.json(student)
+            )
+            .catch((err) => res.status(500).json(err))
+    }
 }
 
 

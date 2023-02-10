@@ -3,13 +3,25 @@ const {
     getUsers,
     getSingleUser,
     createUser,
+    addFriend
 } = require('../../controllers/userController');
 
 //*     '/api/users'
 // can add post route in same line as get
-router.route('/').get(getUsers).post(createUser)
+// GET all users, POST one new user
+router
+    .route('/')
+    .get(getUsers)
+    .post(createUser)
 
-router.route('/:userId')
+//*     '/api/users/:userId'
+// GET one user by id
+router
+    .route('/:userId')
     .get(getSingleUser)
+
+router
+    .route('/:userId/friends/:friendId')
+    .post(addFriend)
 
 module.exports = router;

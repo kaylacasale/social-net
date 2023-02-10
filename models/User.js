@@ -38,7 +38,7 @@ const userSchema = new Schema(
         thoughts: [
             {
                 type: Schema.Types.ObjectId, //* need to push id to thoughts arr in user table 
-                ref: 'thought'
+                ref: 'Thought'
             }
         ]
     },
@@ -46,7 +46,7 @@ const userSchema = new Schema(
         friends: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'user',
+                ref: 'User',
                 // default: () => Math.floor(Math.random() * (100 - 70 + 1) + 70),
             }
 
@@ -67,7 +67,7 @@ userSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 })
 // intiialize our User model
-const User = model('user', userSchema);
+const User = model('User', userSchema);
 
 //* friends param needs to be an array of id
 // User.create([
