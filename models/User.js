@@ -1,5 +1,5 @@
 // Require schema and model from mongoose
-const { Schema, model, Types, Email } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 //* message if user enters invalid email
 
 
@@ -35,21 +35,19 @@ const userSchema = new Schema(
         },
         // thoughts: [thoughtSchema],
         //* acts like foreign key to Thought model 
+        //* need to push id to thoughts arr in user table 
         thoughts: [
             {
-                type: Schema.Types.ObjectId, //* need to push id to thoughts arr in user table 
+                type: Schema.Types.ObjectId,
                 ref: 'Thought'
             }
-        ]
-    },
-    {
+        ],
         friends: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User',
                 // default: () => Math.floor(Math.random() * (100 - 70 + 1) + 70),
             }
-
         ],
     },
     // Mongoose supports two Schema options to transform Objects after querying MongoDb: toJSON and toObject.
