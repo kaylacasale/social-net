@@ -39,7 +39,7 @@ module.exports = {
             })
     },
 
-    // get a single user by ID
+    // get a single user by ID (GET route to '/api/users/:userId)
     getSingleUser({ params }, res) {
         User.findOne({ _id: params.userId })
             .populate("thoughts")
@@ -55,8 +55,12 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err))
     },
-
-    //create a user
+    //* example POST request body below:
+    // {
+    //     "username": "lernantino",
+    //     "email": "lernantino@gmail.com"
+    //   }
+    //create a user (POST route to '/api/users')
     createUser(req, res) {
         User.create(req.body)
             .then((user) => res.json(user))
@@ -66,8 +70,24 @@ module.exports = {
             });
     },
 
+    // update a user (PUT route to '/api/users/:userId')
+    updateUser(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $set: req.body },
+            { runValidators: true, new: true }
+        )
+            .then((user) =>
+                !user
+                    ? res.status(404).json({ message: "No user found with this ID! :(" })
+                    : res.json(user)
+            )
+            .catch((err) => res.status(500).json(err))
+    },
 
-    // add a friend
+
+
+    // add a friend (POST route to '/api/users/:userId')
     addFriend(req, res) {
         console.log('You are adding a friend!');
         console.log(req.body);

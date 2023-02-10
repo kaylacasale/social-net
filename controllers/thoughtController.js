@@ -21,7 +21,12 @@ module.exports = {
     },
 
     // create a thought and push the created thought's _id to the associated user's thoughts array field
-
+    //* example data for POST request body
+    // {
+    //     "thoughtText": "Here's a cool thought...",
+    //     "username": "lernantino",
+    //     "userId": "5edff358a0fcb779aa7b118b"
+    //   }
     // create a thought associated with a user by _id
     createThought(req, res) {
         Thought.create(req.body)
