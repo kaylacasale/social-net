@@ -86,8 +86,8 @@ module.exports = {
     },
 
 
-
-    // add a friend (POST route to '/api/users/:userId')
+    // /api/users/:userId/friends/:friendId
+    // add a friend (POST route to '/api/users/friends/:friendId)
     addFriend(req, res) {
         console.log('You are adding a friend!');
         console.log(req.body);

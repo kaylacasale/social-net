@@ -21,7 +21,7 @@ router
     .route('/:userId')
     .get(getSingleUser)
     .put(updateUser)
-
+//*     '/api/users/:userId/friends/:friendId'
 router
     .route('/:userId/friends/:friendId')
     .post(addFriend)
