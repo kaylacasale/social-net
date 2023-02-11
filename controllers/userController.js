@@ -70,7 +70,7 @@ module.exports = {
             });
     },
 
-    // update a user (PUT route to '/api/users/:userId')
+    // update a user by id (PUT route to '/api/users/:userId')
     updateUser(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
@@ -84,6 +84,7 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err))
     },
+    // delete a user by id (DELETE route to '/api/users/:userId)
     deleteUser(req, res) {
         User.findOneAndDelete({ _id: req.params.userId })
             .then((user) =>
@@ -114,7 +115,22 @@ module.exports = {
                     : res.json(student)
             )
             .catch((err) => res.status(500).json(err))
-    }
+    },
+    // delete a friend of a user by '/api/users/:userId/friends/:friendId'
+    deleteFriend(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $pull: { friends: req.params.friendId } },
+            { new: true }
+        )
+            .then(
+                (user) =>
+                    !user
+                        ? res.status(404).json({ message: "No User find with this ID!" })
+                        : res.json(user)
+            )
+            .catch((err) => res.status(500).json(err));
+    },
 }
 
 
