@@ -12,7 +12,8 @@ const { User, Thought } = require('../models');
 
 // aggreegate functions for getting the studentCount
 module.exports = {
-    // get all users
+    // get all users through GET rwquest to url: '/api/users'
+    // no GET request body required
     getUsers(req, res) {
         User.find({})
             .then((user) => res.json(user))
@@ -40,6 +41,7 @@ module.exports = {
     },
 
     // get a single user by ID (GET route to '/api/users/:userId)
+    // no GET request boyd required
     getSingleUser({ params }, res) {
         User.findOne({ _id: params.userId })
             .populate("thoughts")
@@ -55,12 +57,9 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err))
     },
-    //* example POST request body below:
-    // {
-    //     "username": "lernantino",
-    //     "email": "lernantino@gmail.com"
-    //   }
-    //create a user (POST route to '/api/users')
+
+    // create a user through POST route to '/api/users' (will create a unique Mongo-created userId)
+    // POST request body requires: 1) username 2) email (associated with user)
     createUser(req, res) {
         User.create(req.body)
             .then((user) => res.json(user))
@@ -69,6 +68,11 @@ module.exports = {
                 return res.status(500).json(err);
             });
     },
+    //* example POST request body below:
+    // {
+    //     "username": "lernantino",
+    //     "email": "lernantino@gmail.com"
+    //   }
 
     // update a user by id (PUT route to '/api/users/:userId')
     updateUser(req, res) {
@@ -98,12 +102,13 @@ module.exports = {
 
 
     // /api/users/:userId/friends/:friendId
-    // add a friend (POST route to '/api/users/friends/:friendId)
+    // add a friend through POST route to '/api/users/:userId/friends/:friendId' where friendId is another user's userId
+    // request body requires: 1) userId we are adding a friend to 2) friendId which is the userId of the friend that will be added to the user's friends array
     addFriend(req, res) {
         console.log('You are adding a friend!');
         console.log(req.body);
         User.findOneAndUpdate(
-            { _id: req.params.friendId },
+            { _id: req.params.userId },
             { $addToSet: { friends: req.params.friendId } },
             { runValidators: true, new: true }
         )
@@ -116,6 +121,16 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err))
     },
+    //* first example POST request body to add a friend by '/api/users/63e70757d8f29e21904ebd1a/friends/63ead9cc23a5f12b4f3b801f': 
+    // {
+    //     "userId": "63e70757d8f29e21904ebd1a",
+    //     "friendId": "63ead9cc23a5f12b4f3b801f"
+    // }
+    //* second example POST request body to add another friend (push into friends array of same user) by '/api/users/63e70757d8f29e21904ebd1a/friends/63e62fca04c0a07cb1741ce2':
+    // {
+    //     "userId": "63e70757d8f29e21904ebd1a",
+    //     "friendId": "63e62fca04c0a07cb1741ce2"
+    // }
     // delete a friend of a user by '/api/users/:userId/friends/:friendId'
     deleteFriend(req, res) {
         User.findOneAndUpdate(
@@ -132,7 +147,8 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 }
-
+//* example DELETE request url: '/api/users/63e70757d8f29e21904ebd1a/friends/63e70757d8f29e21904ebd1a'
+//* no request body
 
   // get all users
     // getUsers(req, res) {
