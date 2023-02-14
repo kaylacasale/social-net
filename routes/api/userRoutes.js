@@ -18,7 +18,7 @@ router
     .post(createUser)
 
 //*     '/api/users/:userId'
-// GET one user by id
+// GET one user by id, PUT (update) one existing user, and DELETE one existing user
 router
     .route('/:userId')
     .get(getSingleUser)
@@ -29,6 +29,7 @@ router
 // router
 //     .route('/:userId/friends')
 //     .post(addFriend)
+// POST (create) a new friend of an existing user and DELETE an existing friend of an existing user
 router
     .route('/:userId/friends/:friendId')
     .post(addFriend)

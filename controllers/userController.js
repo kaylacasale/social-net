@@ -88,6 +88,12 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err))
     },
+    //* example PUT request body:
+    // {
+    //     "username": "The Eye of Sauron",
+    //     "email": "meta@facebook.com"
+    // }
+
     // delete a user by id (DELETE route to '/api/users/:userId)
     deleteUser(req, res) {
         User.findOneAndDelete({ _id: req.params.userId })
@@ -122,6 +128,7 @@ module.exports = {
             .catch((err) => res.status(500).json(err))
     },
     //* first example POST request body to add a friend by '/api/users/63e70757d8f29e21904ebd1a/friends/63ead9cc23a5f12b4f3b801f': 
+    //* no request body needed (can add to visualize userId and friendId in console)
     // {
     //     "userId": "63e70757d8f29e21904ebd1a",
     //     "friendId": "63ead9cc23a5f12b4f3b801f"
