@@ -3,12 +3,6 @@ A social networking application created via an API where users can create accoun
 
 This application uses Express.js to establish routes, a MongoDB database, the Mongoose ODM, and DayJS to format timestamps. All seed data except for basic user ingo was created using Postman.
 
-## Description: Social Network API (NoSQL)
-In developing this application, I utilized Express.js and Node.js to make up the middle or application layer, and MongoDB (via Mongoose) to create the database layer, and Postman to dynamically add real data to the database. This application is focused on back-end functionality, so it will require installation of Node, Express, and a playground like Postman or Insomnia.
-
-Social media technology has offered us greater convenience and connectivity. Staying connected with family and friends worldwide via email, FaceTime, etc. has never been so accessible. Along with this- quick access to information and research, online learning, job skills, content discovery, and opportunities for remote employment are all benefits of social media APIs. 
-
-Social-Net allows users to dynamically create, delete, and update user information such as thoughts posted, reactions, friend lists, etc.
 
 ## User Story
 ```md
@@ -18,13 +12,19 @@ SO THAT my website can handle large amounts of unstructured datav
 ```
 
 ## Table of Contents
-* [Description](#description)
+* [Description: Social Network API (NoSQL)](#description-social-network-api-nosql)
 * [Features](#features)
 * [Installation](#installation)
 * [Usage](#usage)
 * [Built With](#built-with)
-* [ERD](#erd)
 * [Walkthrough Video](#walk-through-video)
+
+## Description: Social Network API (NoSQL)
+In developing this application, I utilized Express.js and Node.js to make up the middle or application layer, and MongoDB (via Mongoose) to create the database layer, and Postman to dynamically add real data to the database. This application is focused on back-end functionality, so it will require installation of Node, Express, and a playground like Postman or Insomnia.
+
+Social media technology has offered us greater convenience and connectivity. Staying connected with family and friends worldwide via email, FaceTime, etc. has never been so accessible. Along with this- quick access to information and research, online learning, job skills, content discovery, and opportunities for remote employment are all benefits of social media APIs. 
+
+Social-Net allows users to dynamically create, delete, and update user information such as thoughts posted, reactions, friend lists, etc.
 
 ## Features
 > This is a social network API that uses MongoDB, a NoSQL database, which allows applications to handle large amounts of unstructured data. MongoDB, a general purpose NoSQL, document database, uses documents to store data. MongoDB is very compatile with JavaScript because it stores data in objects called BSON (Binary JSON). A BSON looks and acts just like JSON, but is optimized for faster parsing. The key decision in designing data models for MongoDB applications revolves around the structure of documents and how the application represents relationships between data. MongoDB allows related data to be embedded within a single document. MongoDB also is also a great choice for heterogenous data, and scales easily.
@@ -139,13 +139,79 @@ This application holds two main collections of documents stored in the NoSQL dat
 - existing reaction from thought's reaction array by thought's _id (/api/thoughts/:thoughtId/reactions)
 
 
-> After creating, updating, and deleting data in Postman (or Insomnia) dynamicaly, MongoDB also reflects the data stored and can be viewed through the MongoDB Compass tool
+> After creating, updating, and deleting data from the `socialNetDB` in Postman (or Insomnia) dynamicaly, MongoDB also reflects the data stored and can be viewed through the MongoDB Compass tool
 
 ![View social-net data in MongoDB Compass](assets/mongodb-compass.png "MongoDB Compass")
 
 
+## Installation
+
+1. To clone this project from GitHub to your local computer
+
+> Click the Code drop-down button in this page and Copy URL for that repository:
+
+![Copy Code](assets/copy-code-ecommerce.png "Clone GitHub Repo")
+
+> Enter the following command in your terminal on the level of your project folder (assuming you have Git installed)
+
+    `git clone <URL>`
+    > URL = https://github.com/kaylacasale/social-net.git
 
 
 
 
+2. Install neccessary packages
 
+This application uses Express.js (via Node.js for routing), MongoDB (NoSQL database), and Mongoose (ODM) to run on the command-line.
+
+> Enter into the terminal in your source folder
+
+    `npm install`
+
+OR
+
+    `npm i`
+
+> Alternative: install each dependency manually
+
+    `npm i express`
+
+    `npm i mongoose`
+
+3. Install MongoDB locally along with Postman to manipulate data and Compass to view in database on your machine.
+
+    >> MongoDB (https://coding-boot-camp.github.io/full-stack/mongodb/how-to-install-mongodb)
+    >> Postman (https://www.postman.com/downloads/)
+    >> MongoDB Compass (https://www.mongodb.com/try/download/compass)
+
+## Usage
+
+> To start the server and invoke the application, run the following command:
+
+    `npm run start`
+
+OR
+
+    `npm start`
+
+> To manipulate (GET, POST, PUT, DELETE) seed data dynamically and test the REST API calls, use Postman or Insomnia:
+
+    request URL starts with:   `http://localhost:3001/...`
+
+> One Mongoose models are synched to the database upon invoking the application, view your updated `socialNetDB` database on MongoDB Compass
+
+- User documents in socialNetDB from Compass
+![View User documents](assets/socialNetDB-users.png "MongoDB Compass")
+    
+- Thought documents in socialNetDB from Compass
+![View Thought documents](assets/socialNetDB-thoughts.png "MongoDB Compass")
+
+
+## Built With
+
+> Javascript
+> Express.js
+> Node.js
+> MongoDB
+> Mongoose
+> Postman
