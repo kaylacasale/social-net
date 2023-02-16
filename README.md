@@ -1,7 +1,7 @@
 # social-net
-A social networking application created via an API where users can create accounts that store information, share their thoughts, react to friends' thoughts, and add friends. This demonstrates calling third-party HTTP-based APIs using JavaScript frameworks using Object Document Mapping - an ORM for non-relational databases (NoSQL) such as MongoDB.
+A social networking application created via an API where users can create accounts that store information, share their thoughts, react to friends' thoughts, and add friends. This demonstrates calling third-party HTTP-based APIs using JavaScript frameworks and Object Document Mapping - an ORM for non-relational databases (NoSQL) such as MongoDB.
 
-This application uses Express.js to establish routes, a MongoDB database, the Mongoose ODM, and DayJS to format timestamps. All seed data except for basic user ingo was created using Postman.
+This application uses Express.js (via Node.js) to establish routes, a MongoDB database, and the Mongoose ODM. All seed data except for basic user info was created dynamically through Postman requests.
 
 
 ## User Story
@@ -30,6 +30,9 @@ Social-Net allows users to dynamically create, delete, and update user informati
 > This is a social network API that uses MongoDB, a NoSQL database, which allows applications to handle large amounts of unstructured data. MongoDB, a general purpose NoSQL, document database, uses documents to store data. MongoDB is very compatile with JavaScript because it stores data in objects called BSON (Binary JSON). A BSON looks and acts just like JSON, but is optimized for faster parsing. The key decision in designing data models for MongoDB applications revolves around the structure of documents and how the application represents relationships between data. MongoDB allows related data to be embedded within a single document. MongoDB also is also a great choice for heterogenous data, and scales easily.
 
 This application holds two main collections of documents stored in the NoSQL database that reference each other, and together, form the `social-net` database. These collections are provided by embedded data models and normalized data models. Mongoose also facilitates data in virtuals, which are document properties that do not persist or get stored in the MongoDB database, they only exist logically as an additional field for a given model.
+
+
+**The following chart outlines the document schema and modeling relationships of the socialNetDB in MongoDB**
 
 | Database          | Collections           | Documents                 | Fields                | DBRefs     | References | Virtual |
 |:-----------------:|:---------------------:|:-------------------------:|:---------------------:|:----------:|:----------:|:--------|
@@ -93,7 +96,7 @@ This application holds two main collections of documents stored in the NoSQL dat
     - request body:
         1) thoughtText
         2) username
-        3) userId (referencing User; stored in associated user's thoughts array field)
+        3) userId (stored in associated user's thoughts array field)
 
 ![POST a new thought](assets/POST-a-thought.png "POST route to create a new thought")
 
@@ -150,7 +153,7 @@ This application holds two main collections of documents stored in the NoSQL dat
 
 > Click the Code drop-down button in this page and Copy URL for that repository:
 
-![Copy Code](assets/copy-code-ecommerce.png "Clone GitHub Repo")
+![Copy Code](assets/copy-code-socialNet.png "Clone GitHub Repo")
 
 > Enter the following command in your terminal on the level of your project folder (assuming you have Git installed)
 
@@ -181,7 +184,9 @@ OR
 3. Install MongoDB locally along with Postman to manipulate data and Compass to view in database on your machine.
 
     >> MongoDB (https://coding-boot-camp.github.io/full-stack/mongodb/how-to-install-mongodb)
+
     >> Postman (https://www.postman.com/downloads/)
+
     >> MongoDB Compass (https://www.mongodb.com/try/download/compass)
 
 ## Usage
@@ -194,7 +199,7 @@ OR
 
     `npm start`
 
-> To manipulate (GET, POST, PUT, DELETE) seed data dynamically and test the REST API calls, use Postman or Insomnia:
+> To manipulate (GET, POST, PUT, DELETE) seed data dynamically and test the API protocols, use Postman or Insomnia:
 
     request URL starts with:   `http://localhost:3001/...`
 
@@ -210,8 +215,15 @@ OR
 ## Built With
 
 > Javascript
+
 > Express.js
+
 > Node.js
+
 > MongoDB
+
 > Mongoose
+
 > Postman
+
+## Walkthrough Video
